@@ -1,0 +1,10 @@
+{
+  "name": "eDigit32 Mobile",
+  "short_name": "eDigit32",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#dcecf7",
+  "theme_color": "#167fbd",
+  "description": "eDigit32-style 2D and 3D number slip manager",
+  "icons": []
+}

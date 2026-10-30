@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#167fbd">
+  <meta name="description" content="eDigit32-style 2D and 3D number slip manager">
+  <title>eDigit32 Mobile</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">32</span><div><strong>eDigit32 Mobile</strong><small>2D / 3D LOTTERY MANAGER</small></div></div>
+  <div class="top-actions"><span id="cloudStatus" class="cloud-status">● Local mode</span><button id="installBtn" class="small-btn" hidden>Install</button></div>
+</header>
+
+<main class="shell">
+  <section class="entry-panel panel">
+    <div class="panel-title">ENTRY</div>
+    <label>Customer
+      <div class="inline"><select id="customerSelect"><option value="Walk-in">Walk-in</option></select><button id="addCustomerBtn" class="square-btn" title="Add customer">＋</button></div>
+    </label>
+    <div class="two-cols">
+      <label>Lottery type<select id="lotteryType"><option value="2D">2D LOTTERY</option><option value="3D">3D LOTTERY</option></select></label>
+      <label>Number<input id="numberInput" inputmode="numeric" autocomplete="off" placeholder="00" maxlength="3"></label>
+    </div>
+    <div class="two-cols">
+      <label>Unit<input id="unitInput" inputmode="decimal" type="number" min="0" step="any" placeholder="0"></label>
+      <label>Extra<input id="extraInput" inputmode="decimal" type="number" min="0" step="any" placeholder="0"></label>
+    </div>
+    <div class="button-row">
+      <button id="addEntryBtn" class="primary">Add entry</button>
+      <button id="reverseBtn" class="secondary">Reverse</button>
+    </div>
+    <div class="button-row">
+      <button id="saveSlipBtn" class="primary">Save slip</button>
+      <button id="clearBtn" class="secondary">Clear</button>
+    </div>
+    <div class="totals-box">
+      <div><span>Entries</span><b id="entryCount">0</b></div>
+      <div><span>Unit total</span><b id="unitTotal">0</b></div>
+      <div><span>Extra total</span><b id="extraTotal">0</b></div>
+      <div class="grand"><span>Grand total</span><b id="grandTotal">0</b></div>
+    </div>
+    <div class="panel-title sub">BACKUP & DATA</div>
+    <button id="cloudBtn" class="cloud-btn">Sign in / Cloud backup</button>
+    <div class="button-row">
+      <button id="exportBtn" class="secondary">Export</button>
+      <button id="importBtn" class="secondary">Import</button>
+      <input id="importFile" type="file" accept="application/json" hidden>
+    </div>
+    <p class="hint">Entries are saved on this phone. Set up Firebase to enable secure online backup.</p>
+  </section>
+
+  <section class="workspace">
+    <section class="panel slip-panel">
+      <div class="panel-heading"><div><div class="panel-title">CURRENT SLIP</div><small id="slipCustomer">Customer: Walk-in</small></div><span id="slipType" class="type-pill">2D</span></div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Type</th><th>Number</th><th>Unit</th><th>Extra</th><th></th></tr></thead><tbody id="entriesBody"><tr><td colspan="5" class="empty">No entries yet</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="panel summary-panel">
+      <div class="panel-heading"><div class="panel-title">NUMBER SUMMARY</div><select id="summaryType"><option value="2D">2D LOTTERY</option><option value="3D">3D LOTTERY</option></select></div>
+      <div class="summary-grid" id="summaryGrid"></div>
+      <div class="summary-foot"><span>Numbers with entries</span><b id="summaryCount">0</b><span>Summary unit total</span><b id="summaryTotal">0</b></div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-heading"><div class="panel-title">SAVED SLIPS</div><button id="refreshHistoryBtn" class="small-btn">Refresh</button></div>
+      <div id="historyList" class="history-list"><div class="empty">No saved slips</div></div>
+    </section>
+  </section>
+</main>
+<footer>eDigit32 Mobile • Independent companion app • Not affiliated with the original eDigit32 publisher</footer>
+
+<dialog id="customerDialog">
+  <form method="dialog" id="customerForm"><h3>Add customer</h3><label>Customer name<input id="newCustomerName" maxlength="50" required placeholder="Name"></label><div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="saveCustomerBtn" value="default" class="primary">Add</button></div></form>
+</dialog>
+<dialog id="cloudDialog">
+  <form method="dialog" id="cloudForm"><h3>Online backup</h3><p class="hint">Enter your Firebase project's web app settings in <code>firebase-config.js</code> first. Then sign in with your email and password.</p><label>Email<input id="cloudEmail" type="email" autocomplete="username" required></label><label>Password<input id="cloudPassword" type="password" autocomplete="current-password" required></label><div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="signInBtn" value="default" class="primary">Sign in & sync</button></div><p id="cloudMessage" class="hint"></p></form>
+</dialog>
+<script type="module" src="app.js"></script>
+</body>
+</html>
